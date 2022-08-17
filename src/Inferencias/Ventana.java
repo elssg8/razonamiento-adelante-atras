@@ -67,7 +67,7 @@ public class Ventana extends JFrame {
     }
 
     public void comboBox(){
-        String[] base_conocimiento = {"h1", "h2", "h3", "h4", "h5", "h6", "h7", "h9"};
+        String[] base_conocimiento = {"h1", "h2", "h3", "h4", "h5", "h6", "h7", "h8", "h9"};
         cb1 = new JComboBox(base_conocimiento);
         cb1.setBounds(200, 10, 110, 30);
 

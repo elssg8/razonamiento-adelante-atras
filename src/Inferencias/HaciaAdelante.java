@@ -1,12 +1,15 @@
 package Inferencias;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class HaciaAdelante extends Thread{
+    //Se crean variables globales
     private String meta;
     private  String conocimiento_1;
     private String conocimiento_2;
 
+    //Constructora del hilo con parametros para recibir la base de conocimiento y la meta
     public HaciaAdelante(String meta, String conocimiento_1, String conocimiento_2){
             this.meta = meta;
             this.conocimiento_1 = conocimiento_1;
@@ -14,6 +17,7 @@ public class HaciaAdelante extends Thread{
     }
 
     public void run(){
+        //Creacion de Arrays para cada R con las condiciones y resultados
         ArrayList <String> R1_condiciones = new ArrayList<>();
         R1_condiciones.add("h8");
         R1_condiciones.add("h6");
@@ -66,8 +70,12 @@ public class HaciaAdelante extends Thread{
         ArrayList <String> R9_resultado = new ArrayList<>();
         R9_resultado.add("h6");
 
-        String[] base_conocimiento = {conocimiento_1, conocimiento_2};
+        //Creacion de la base de conocimiento
+        ArrayList <String> base_conocimiento = new ArrayList<>();
+        base_conocimiento.add(conocimiento_1);
+        base_conocimiento.add(conocimiento_2);
 
+        //Creacion de un array que contiene los Arrays de R1-R9
         ArrayList <ArrayList> R = new ArrayList<>();
         R.add(R1_condiciones);
         R.add(R2_condiciones);
@@ -79,26 +87,29 @@ public class HaciaAdelante extends Thread{
         R.add(R8_condiciones);
         R.add(R9_condiciones);
 
-        int count = 1;
-        for(ArrayList <ArrayList> Rs : R){
-            //System.out.println(Rs);
-            String R_name = "R" + count;
-            System.out.println(R_name);
-            for(int i=0; i<Rs.size(); i++){
-                if(conocimiento_1.equals(Rs.get(i))){
+        //Recorrido de R1-R9 en orden y busqueda de coincidencias en las condiciones con el primer elemento de la
+        //base de conocimiento
+        for (String h_extraida : base_conocimiento){
+            int count = 1;
+            ArrayList <R> C_y_CC = new ArrayList<>();
+            for(ArrayList <ArrayList> Rs : R){
+                //System.out.println(Rs);
+                String R_name = "R" + count;
+                //System.out.println(R_name);
+                for(int i=0; i<Rs.size(); i++){
+                    if(h_extraida.equals(Rs.get(i))){
+                        //C_y_CC.add("R1", );
+                        System.out.println(h_extraida + "se encuentra en: \n" + R_name + "-->" + Rs.get(i));
+                        ;
+                    } /*lse if (conocimiento_2.equals(Rs.get(i))) {
                     System.out.println(Rs.get(i));
-
-                } else if (conocimiento_2.equals(Rs.get(i))) {
-                    System.out.println(Rs.get(i));
-                }else {
-                    System.out.println("No match condition");
+                }*/else {
+                        //System.out.println("No match condition");
+                    }
                 }
+                count++;
             }
-            count++;
-        }
-
-        for(String match : R1_condiciones){
-
+            ;
         }
 
     }
