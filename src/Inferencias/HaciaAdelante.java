@@ -1,7 +1,6 @@
 package Inferencias;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class HaciaAdelante extends Thread{
     //Se crean variables globales
@@ -89,28 +88,47 @@ public class HaciaAdelante extends Thread{
 
         //Recorrido de R1-R9 en orden y busqueda de coincidencias en las condiciones con el primer elemento de la
         //base de conocimiento
-        for (String h_extraida : base_conocimiento){
+        for (String h_extraida : base_conocimiento){//Recorrido de la base de conocimiento
             int count = 1;
-            ArrayList <R> C_y_CC = new ArrayList<>();
-            for(ArrayList <ArrayList> Rs : R){
+            ArrayList <Rclass> condicion_CC = new ArrayList<>();
+            for(ArrayList <ArrayList> Rs : R){//Recorrido de R1-R9
                 //System.out.println(Rs);
                 String R_name = "R" + count;
+                Rclass aux;
                 //System.out.println(R_name);
-                for(int i=0; i<Rs.size(); i++){
+                for(int i=0; i<Rs.size(); i++){//Recorrido de R
                     if(h_extraida.equals(Rs.get(i))){
-                        //C_y_CC.add("R1", );
-                        System.out.println(h_extraida + "se encuentra en: \n" + R_name + "-->" + Rs.get(i));
-                        ;
-                    } /*lse if (conocimiento_2.equals(Rs.get(i))) {
-                    System.out.println(Rs.get(i));
-                }*/else {
-                        //System.out.println("No match condition");
+                        aux = new Rclass();
+                        int count_CC = 0;
+                        //Saber cuantas condiciones conocidad tiene
+                        for(int j=0; j< Rs.size(); j++){
+                            for(String hc : base_conocimiento){
+                                if(hc.equals(Rs.get(j))){
+                                    count_CC++;
+                                }
+                            }
+                        }
+                        aux.setId(R_name);
+                        aux.setCondiciones(Rs.size());
+                        aux.setCondiciones_conocidas(count_CC);
+                        aux.setPeso(count);
+                        condicion_CC.add(aux);
+
+                        System.out.println(h_extraida + " se encuentra en: \n" + R_name + "-->" + Rs.get(i));
+
+
                     }
-                }
+
+                }//R actual
                 count++;
+
+            }//Todas las R
+            for(int x=0; x< condicion_CC.size(); x++){
+                System.out.println(condicion_CC.get(x));
             }
-            ;
-        }
+            //Hacer algo con el primer bloque
+
+        }//Base de conocimiento
 
     }
 }
