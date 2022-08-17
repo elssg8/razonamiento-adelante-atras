@@ -1,6 +1,8 @@
 package Inferencias;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class HaciaAdelante extends Thread{
     //Se crean variables globales
@@ -123,11 +125,35 @@ public class HaciaAdelante extends Thread{
                 count++;
 
             }//Todas las R
+            int [] cc = new int[condicion_CC.size()];
+            String [] eleccion = new String[condicion_CC.size()];
             for(int x=0; x< condicion_CC.size(); x++){
                 System.out.println(condicion_CC.get(x));
-            }
-            //Hacer algo con el primer bloque
+                if(condicion_CC.get(x).getCondiciones() == condicion_CC.get(x).getCondiciones_conocidas()){
+                    //System.out.println("Eleccion: " + condicion_CC.get(x).getId());
+                    eleccion [x]= condicion_CC.get(x).getId();
+                    cc [x] = condicion_CC.get(x).getCondiciones_conocidas();
+                }
 
+
+            }
+
+            Arrays.sort(cc);
+            for( int a=0; a< condicion_CC.size(); a++){
+                if(condicion_CC.get(a).getId().equals(eleccion[a])){
+                    if(cc[cc.length-1] == condicion_CC.get(a).getCondiciones_conocidas()){
+                        System.out.println("Eleccion: " + condicion_CC.get(a).getId());
+                    }
+                }
+            }
+
+
+            /*if(eleccion == null){
+                Arrays.sort(pesos);
+                System.out.println("Eleccion: " + pesos[0]);
+            }*/
+
+            //Hacer algo con el primer bloque
         }//Base de conocimiento
 
     }
